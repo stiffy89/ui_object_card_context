@@ -1,0 +1,81 @@
+{
+	"_version": "1.14.0",
+	"sap.app": {
+		"id": "ns.ui_object_card_context",
+		"type": "card",
+		"title": "Object card with context",
+		"subTitle": "",
+		"applicationVersion": {
+			"version": "1.0.1"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+        "deviceTypes": {"desktop": true, "phone": true, "tablet": true},
+		"icons": {
+			"icon": "sap-icon://list"
+		}
+	},
+	"sap.card": {
+		"type": "Object",
+        "designtime": "dt/configuration",
+		"configuration" : {
+			"destinations": {
+				"ES5": {
+					"name" : "ES5",
+					"defaultUrl" : "/sap/opu/odata/iwbep/GWSAMPLE_BASIC/ContactSet"
+				}
+			}
+		},
+		"content": {
+			"data": {
+				"request" : {
+					"url" : "{{destinations.ES5}}/sap/opu/odata/iwbep/GWSAMPLE_BASIC/SalesOrderSet",
+					"withCredentials": true,
+					"parameters": {
+						"$filter": "SalesOrderID eq '{context>/ns.ui_table_card/SalesOrderID}'"
+					}
+				},
+				"path" : "/d/results/0/"
+			},
+			"groups": [
+				{
+					"title": "Sales Order Details",
+					"items": [
+						{
+							"label": "Sales Order ID",
+							"value": "{SalesOrderID}"
+						},
+						{
+							"label": "Order Note",
+							"value": "{Note}"
+						},
+						{
+							"label": "Customer Name",
+							"value": "{CustomerName}"
+						},
+						{
+							"label": "Net Amount",
+							"value": "{NetAmount}"
+						},
+						{
+							"label": "Tax Amount",
+							"value": "{TaxAmount}"
+						},
+						{
+							"label" : "Billing Status",
+							"value" : "{BillingStatusDescription}"
+						},
+						{
+							"label" : "Delivery Status",
+							"value" : "{DeliveryStatusDescription}"
+						}
+					]
+				}
+			]
+		}
+	},
+    "sap.platform.mobilecards": {
+        "compatible": false
+    }
+}
